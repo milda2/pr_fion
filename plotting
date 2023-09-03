@@ -1,0 +1,23 @@
+import networkx as nx
+import matplotlib.pyplot as plt
+
+def plot_go_terms(go_terms, relationships):
+    """
+    Plots a network of GO terms based on relationships.
+    
+    Parameters:
+    go_terms (list): List of GO terms as strings.
+    relationships (list of tuples): List of tuples (parent, child) representing relationships.
+    """
+    G = nx.DiGraph()
+    G.add_nodes_from(go_terms)
+    G.add_edges_from(relationships)
+
+    pos = nx.spring_layout(G)  # Positioning of nodes
+    nx.draw(G, pos, with_labels=True, node_color='lightblue', font_weight='bold', node_size=700, font_size=18)
+    plt.show()
+
+# Example usage
+go_terms = ['GO:0008150', 'GO:0003674', 'GO:0005575']
+relationships = [('GO:0008150', 'GO:0003674'), ('GO:0008150', 'GO:0005575')]
+plot_go_terms(go_terms, relationships)
